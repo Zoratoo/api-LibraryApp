@@ -21,14 +21,18 @@ public class Book {
     private String genre;
     @Column(name = "book_quantity")
     private int quantity;
+    @Column(name = "book_available")
+    private int available;
     @Column(name = "book_rental_price")
     private float price;
+    @Column(name = "book_image_url")
+    private String image_url;
 
     public Book() {
-        this(0L,"","","",0,"",0,0);
+        this(0L,"","","",0,"",0,0,0,"");
     }
 
-    public Book(Long id, String title, String author, String publisher, int publication_year, String genre, int quantity, float price) {
+    public Book(Long id, String title, String author, String publisher, int publication_year, String genre, int quantity, int available, float price, String image_url) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -36,7 +40,9 @@ public class Book {
         this.publication_year = publication_year;
         this.genre = genre;
         this.quantity = quantity;
+        this.available = available;
         this.price = price;
+        this.image_url = image_url;
     }
 
     public Long getId() {
@@ -95,11 +101,27 @@ public class Book {
         this.quantity = quantity;
     }
 
+    public int getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(int available) {
+        this.available = available;
+    }
+
     public float getPrice() {
         return price;
     }
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }

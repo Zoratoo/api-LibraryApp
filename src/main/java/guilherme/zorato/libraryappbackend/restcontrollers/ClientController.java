@@ -3,13 +3,13 @@ package guilherme.zorato.libraryappbackend.restcontrollers;
 import guilherme.zorato.libraryappbackend.entities.Client;
 import guilherme.zorato.libraryappbackend.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("apis/client")
 public class ClientController {
@@ -36,4 +36,15 @@ public class ClientController {
         repo.deleteById(id);
         return ResponseEntity.ok("Client deleted");
     }
+
+    @GetMapping("find-cpf")
+    public  ResponseEntity<Object> findCpf(@RequestParam String cpf) {
+        Client client = repo.findCpf(cpf);
+        if (client != null) {
+            return ResponseEntity.ok(client);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
 }

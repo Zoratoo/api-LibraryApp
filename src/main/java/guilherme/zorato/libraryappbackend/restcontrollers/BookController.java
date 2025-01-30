@@ -4,12 +4,14 @@ import guilherme.zorato.libraryappbackend.entities.Book;
 import guilherme.zorato.libraryappbackend.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("apis/book")
 public class BookController {
@@ -35,5 +37,11 @@ public class BookController {
     public ResponseEntity<Object> deleteBook(Long id) {
         repo.deleteById(id);
         return ResponseEntity.ok("Book deleted");
+    }
+
+    @GetMapping("/find-all-genres")
+    public ResponseEntity<Object> findAllGenres() {
+        List<String> genres = repo.findAllGenres();
+        return ResponseEntity.ok(genres);
     }
 }
