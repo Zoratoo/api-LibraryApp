@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "rental")
@@ -18,10 +19,13 @@ public class Rental {
     @JoinColumn(name = "cli_id", nullable = false)
     private Client client;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
-
+    @ManyToMany
+    @JoinTable(
+            name = "rental_books",
+            joinColumns = @JoinColumn(name = "rent_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private List<Book> books;
     @ManyToOne
     @JoinColumn(name = "emp_id", nullable = false)
     private Employee employee;
@@ -38,10 +42,10 @@ public class Rental {
         this(0L,null,null,null,LocalDate.now(),LocalDate.now(),'e',0);
     }
 
-    public Rental(Long id, Client client, Book book, Employee employee, LocalDate start_date, LocalDate end_date, char status, float late_fee_per_day) {
+    public Rental(Long id, Client client, List<Book> books, Employee employee, LocalDate start_date, LocalDate end_date, char status, float late_fee_per_day) {
         this.id = id;
         this.client = client;
-        this.book = book;
+        this.books = books;
         this.employee = employee;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -65,12 +69,12 @@ public class Rental {
         this.client = client;
     }
 
-    public Book getBook() {
-        return book;
+    public List<Book> getBook() {
+        return books;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBook(List<Book> books) {
+        this.books = books;
     }
 
     public Employee getEmployee() {

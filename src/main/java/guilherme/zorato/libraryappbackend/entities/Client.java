@@ -20,17 +20,21 @@ public class Client {
     @Column(name="cli_phone")
     private String phone;
 
+    @Column(name="cli_email")
+    private String email;
+
     public Client() {
-        this(0L,"","","","","");
+        this(0L,"","","","","","");
     }
 
-    public Client(Long id, String name, String cpf, String address, String cep, String phone) {
+    public Client(Long id, String name, String cpf, String address, String cep, String phone, String email) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.address = address;
         this.cep = cep;
         this.phone = phone;
+        this.email = email;
     }
 
     public Long getId() {
@@ -79,5 +83,13 @@ public class Client {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
