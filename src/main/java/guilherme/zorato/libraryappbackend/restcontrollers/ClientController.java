@@ -20,8 +20,8 @@ public class ClientController {
     @Autowired
     RentalRepository rent_repo;
 
-    @GetMapping("/add")
-    public ResponseEntity<Object> addClient(Client client) {
+    @PostMapping("/add")
+    public ResponseEntity<Object> addClient(@RequestBody Client client) {
         Client cli = repo.save(client);
         if(cli==null)
             return ResponseEntity.badRequest().body("Erro ao inserir ou alterar");
@@ -35,7 +35,7 @@ public class ClientController {
         return ResponseEntity.ok(clients);
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<Object> deleteClient(Long id) {
         repo.deleteById(id);
         return ResponseEntity.ok("Client deleted");

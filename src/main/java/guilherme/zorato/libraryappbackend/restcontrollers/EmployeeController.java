@@ -4,9 +4,7 @@ import guilherme.zorato.libraryappbackend.entities.Employee;
 import guilherme.zorato.libraryappbackend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class EmployeeController {
     @Autowired
     EmployeeRepository repo;
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity<Object> addEmployee(Employee employee) {
         Employee emp = repo.save(employee);
         if(emp==null)
@@ -31,7 +29,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employees);
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<Object> deleteEmployee(Long id) {
         repo.deleteById(id);
         return ResponseEntity.ok("Client deleted");

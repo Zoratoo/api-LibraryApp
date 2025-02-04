@@ -4,10 +4,7 @@ import guilherme.zorato.libraryappbackend.entities.Book;
 import guilherme.zorato.libraryappbackend.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class BookController {
     @Autowired
     BookRepository repo;
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity<Object> addBook(Book book) {
         Book b = repo.save(book);
         if(b==null)
@@ -33,7 +30,7 @@ public class BookController {
         return ResponseEntity.ok(books);
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<Object> deleteBook(Long id) {
         repo.deleteById(id);
         return ResponseEntity.ok("Book deleted");

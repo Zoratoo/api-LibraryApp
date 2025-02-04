@@ -19,7 +19,6 @@ public class Client {
     private String cep;
     @Column(name="cli_phone")
     private String phone;
-
     @Column(name="cli_email")
     private String email;
 
