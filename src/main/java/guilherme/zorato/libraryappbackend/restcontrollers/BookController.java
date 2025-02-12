@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("apis/book")
 public class BookController {
@@ -16,12 +16,13 @@ public class BookController {
     BookRepository repo;
 
     @PostMapping("/add")
-    public ResponseEntity<Object> addBook(Book book) {
+    public ResponseEntity<Object> addBook(@RequestBody Book book) {
+        book.setAvailable(book.getQuantity());
         Book b = repo.save(book);
         if(b==null)
-            return ResponseEntity.badRequest().body("Erro ao inserir ou alterar");
+            return ResponseEntity.badRequest().body("Error to add book");
         else
-            return ResponseEntity.ok("Inserido ou alterado com sucesso");
+            return ResponseEntity.ok("Book added successfully");
     }
 
     @GetMapping("/find-all")

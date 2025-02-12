@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("apis/employee")
 public class EmployeeController {
@@ -15,12 +16,12 @@ public class EmployeeController {
     EmployeeRepository repo;
 
     @PostMapping("/add")
-    public ResponseEntity<Object> addEmployee(Employee employee) {
+    public ResponseEntity<Object> addEmployee(@RequestBody Employee employee) {
         Employee emp = repo.save(employee);
         if(emp==null)
-            return ResponseEntity.badRequest().body("Erro ao inserir ou alterar");
+            return ResponseEntity.badRequest().body("Error to add employee");
         else
-            return ResponseEntity.ok("Inserido ou alterado com sucesso");
+            return ResponseEntity.ok("Employee added successfully");
     }
 
     @GetMapping("/find-all")

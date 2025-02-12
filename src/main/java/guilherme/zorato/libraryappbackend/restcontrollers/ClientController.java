@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("apis/client")
 public class ClientController {
@@ -24,9 +24,9 @@ public class ClientController {
     public ResponseEntity<Object> addClient(@RequestBody Client client) {
         Client cli = repo.save(client);
         if(cli==null)
-            return ResponseEntity.badRequest().body("Erro ao inserir ou alterar");
+            return ResponseEntity.badRequest().body("Error to add client");
         else
-            return ResponseEntity.ok("Inserido ou alterado com sucesso");
+            return ResponseEntity.ok("Client added successfully");
     }
 
     @GetMapping("/find-all")
